@@ -1411,7 +1411,7 @@ table.data{max-width:100%}
       <div class="srv-estado" id="srvEstado"><span class="dot"></span><span id="srvTexto">Verificando servidor…</span></div>
       <div class="srv-alerta hidden" id="srvAlerta"></div>
       <div class="login-foot">Dirección de Personal Militar · Información reservada, uso interno exclusivo</div>
-      <div class="cs-index-version" title="Identifica el archivo HTML publicado">Interfaz v1.89 · Servidor requerido v1.56</div>
+      <div class="cs-index-version" title="Identifica el archivo HTML publicado">Interfaz v1.90 · Servidor requerido v1.56</div>
     </div>
   </div>
 </section>
@@ -1432,7 +1432,7 @@ table.data{max-width:100%}
 <section id="view-app" class="view">
   <header class="bar">
     <div class="bar-top">
-      <div class="bar-title"><img data-escudo src="" alt=""><div><p class="kicker">Departamento Planes - DPM · Sistema de Control de Compromisos de Servicio</p><h1 id="appTitulo">Inicio</h1><div class="cs-index-version cs-index-version-app" title="Identifica el archivo HTML publicado">Interfaz v1.89</div></div></div>
+      <div class="bar-title"><img data-escudo src="" alt=""><div><p class="kicker">Departamento Planes - DPM · Sistema de Control de Compromisos de Servicio</p><h1 id="appTitulo">Inicio</h1><div class="cs-index-version cs-index-version-app" title="Identifica el archivo HTML publicado">Interfaz v1.90</div></div></div>
       <div class="user-info">
         <span class="user-info-text" id="userInfo"></span>
         <button type="button" class="hbtn gold" id="btnActualizar">↻ Actualizar datos</button>
@@ -3190,9 +3190,11 @@ function ajustarGieMontos(){
  const mapa=new Map();
  for(const r of lista){
   const id=String(r['Categoría']||'').toUpperCase()+'-'+String(r['Nro']||'');
-  const real=gieValor(r),c=esCcrbaDeterminable(r)?registrados.get(id):null;
-  const ajustado=c&&num(c['Meses'])>0?num(c['GIE $']):null;
-  const modulos=c&&num(c['Meses'])>0?num(c['GIE (M)']):null;
+  // Los valores económicos históricos deben seguir consultables aunque el registro
+  // no sea elegible para una NUEVA determinación de meses de CS (ACT, CR, SM).
+  const real=gieValor(r),c=registrados.get(id);
+  const ajustado=c&&num(c['GIE $'])>0?num(c['GIE $']):null;
+  const modulos=c&&num(c['GIE (M)'])>0?num(c['GIE (M)']):null;
   mapa.set(id,{real,ajustado,modulos});
  }
  return mapa;
@@ -3205,7 +3207,12 @@ function renderMontos(){
  $('montosLugarTitulo').textContent=exterior?'País':'Organismo / Instituto';
  const header=document.querySelector('.montos-tabla thead tr');
  header.innerHTML='<th>Nombre del curso / actividad / residencia</th><th id="montosLugarTitulo">'+(exterior?'País':'Organismo / Instituto')+'</th>'+ (exterior?'<th class="num">GIE real ($)</th><th class="num">GIE ajustado ($)</th><th class="num">GIE (M) determinado</th>':'<th class="num">GIE ($)</th><th class="num">GIE (M)</th>')+'<th class="num">Meses de CS Determinados</th>';
- const aviso=$('montosAvisoPCA');if(aviso)aviso.classList.toggle('hidden',!exterior);
+ const aviso=$('montosAvisoPCA');
+ if(aviso){
+   aviso.classList.toggle('hidden',!exterior);
+   if(categoriaMontos==='ACT') aviso.textContent='Las actividades en el exterior conservan su GIE real y los ajustes económicos registrados. No se realiza una nueva determinación de meses de CS; los ajustes no registrados se identifican expresamente.';
+   else aviso.textContent='El GIE ajustado de cursos en el exterior se obtiene de la determinación registrada. Los registros sin ajuste se muestran como pendientes; no se calculan importes supuestos.';
+ }
  const ajuste=ajustarGieMontos();
  const determinados=new Map((S.d.ccrba||[]).map(c=>[String(c['Código']).toUpperCase(),c]));
  const buscar=sinAcentos($('montosBuscar').value||'').toLowerCase().trim();
@@ -3218,9 +3225,12 @@ function renderMontos(){
  .sort((a,b)=>Number(a.sinCS)-Number(b.sinCS)||String(a.r['Denominación']).localeCompare(String(b.r['Denominación']),'es'));
  $('montosConteo').textContent=filas.length+' registros con GIE cargado';
  $('montosBody').innerHTML=filas.length?filas.map(x=>{
-  const meses=x.sinCS?'No corresponde':x.c&&num(x.c['Meses'])>0?esc(x.c['Meses']):'Pendiente';
+  const meses=x.sinCS?'—':x.c&&num(x.c['Meses'])>0?esc(x.c['Meses']):'Pendiente';
   const pesos='<td class="num">'+fmtPesos(x.a.real,2)+'</td>';
-  const columnas=exterior?'<td class="num">'+(x.sinCS?'No corresponde':x.a.ajustado!==null?fmtPesos(x.a.ajustado,2):'Pendiente')+'</td><td class="num">'+(x.sinCS?'No corresponde':x.a.modulos!==null?fmtNum(x.a.modulos):'Pendiente')+'</td>': '<td class="num">'+(x.sinCS?'No corresponde':vm>0?fmtNum(r2(x.a.real/vm)):'Sin valor de módulo')+'</td>';
+  // Excluir un registro de la determinación de CS no invalida su GIE.
+  // Un ajuste que no consta en los datos debe quedar sin importe, nunca inventarse.
+  const sinAjuste=categoriaMontos==='ACT'?'Sin ajuste registrado':'Pendiente';
+  const columnas=exterior?'<td class="num">'+(x.a.ajustado!==null?fmtPesos(x.a.ajustado,2):sinAjuste)+'</td><td class="num">'+(x.a.modulos!==null?fmtNum(x.a.modulos):sinAjuste)+'</td>': '<td class="num">'+(vm>0?fmtNum(r2(x.a.real/vm)):'Sin valor de módulo')+'</td>';
   return '<tr><td>'+esc(x.r['Denominación'])+'</td><td>'+esc(x.lugar||'—')+'</td>'+pesos+columnas+'<td class="num">'+meses+'</td></tr>';
  }).join(''):'<tr><td colspan="'+(exterior?6:5)+'" class="empty">No hay GIE cargados para esta categoría o búsqueda.</td></tr>';
 }
@@ -3272,11 +3282,15 @@ async function generarExcelMontos(){
   ws.mergeCells('A3:'+end+'3');ws.getCell('A3').value='Fecha de emisión: '+new Date().toLocaleDateString('es-AR')+' | Registros: '+datos.length;
   if(ext){ws.mergeCells('A4:G4');ws.getCell('A4').value='El ajuste proporcional corresponde únicamente a Cursos en el exterior y Actividades en el exterior, para evitar que el Porcentaje de Capacitación Adquirida (PCA) supere el máximo permitido.';ws.getCell('A4').alignment={wrapText:true};ws.getRow(4).height=31;}
   const headers=ext?['Nro',conf.item,conf.lugar,'GIE real ($)','GIE ajustado ($)','GIE (M) determinado','Meses de CS Determinados']:['Nro',conf.item,conf.lugar,'GIE ($)','GIE (M)','Meses de CS Determinados'];
+  if(cat==='ACT'){
+    ws.getCell('A4').value='Las actividades en el exterior conservan su GIE real y el GIE ajustado histórico registrado. No se determinan meses de CS; cuando falta un ajuste, se indica expresamente.';
+   }
   const headerRow=ext?5:4, enc=ws.getRow(headerRow);enc.values=headers;enc.height=35;
   enc.eachCell(c=>{c.font={name:'Arial',size:10,bold:true,color:{argb:'FFFFFFFF'}};c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF1A2744'}};c.alignment={horizontal:'center',vertical:'middle',wrapText:true};});
   datos.forEach((r,i)=>{
-   const meses=r.sinCS?'No corresponde':r.meses||'Pendiente';
-   const valores=ext?[i+1,r.nombre,r.lugar,r.real,r.sinCS?'No corresponde':r.ajustado??'Pendiente',r.sinCS?'No corresponde':r.modulos??'Pendiente',meses]:[i+1,r.nombre,r.lugar,r.real, r.sinCS?'No corresponde':r.real/valorModulo,meses];
+   const meses=r.sinCS?'—':r.meses||'Pendiente';
+   const sinAjuste=cat==='ACT'?'Sin ajuste registrado':'Pendiente';
+   const valores=ext?[i+1,r.nombre,r.lugar,r.real,r.ajustado??sinAjuste,r.modulos??sinAjuste,meses]:[i+1,r.nombre,r.lugar,r.real,r.real/valorModulo,meses];
    const row=ws.addRow(valores);row.font={name:'Arial',size:10};row.height=r.sinCS?39:28;row.alignment={vertical:'middle',wrapText:true};
    row.getCell(4).numFmt='"$" #,##0.00';row.getCell(5).numFmt=ext?'"$" #,##0.00':'#,##0.00';if(ext)row.getCell(6).numFmt='#,##0.00';
    if(i%2===1)row.eachCell(c=>c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFF2F5F9'}});
