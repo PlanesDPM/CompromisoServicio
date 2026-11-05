@@ -3566,6 +3566,17 @@ function modoRegistro(m){
 document.querySelectorAll('#regSeg button').forEach(b=>b.onclick=()=>modoRegistro(b.dataset.modo));
 
 /* ---------------- Registro grupal ---------------- */
+/* v1.85: restaurar las funciones compartidas por Registro Grupal y Generación Word.
+   Conservan la clasificación por país/instituto utilizada desde v1.83. */
+const LOTE_SIN_LUGAR='__SIN_DATO__';
+function lugarGrupoCcrba(c){
+  const codigo=String(c['Código']||'').trim().toUpperCase();
+  const r=registrosGieActivos().find(x=>codigoRegistroGie(x).trim().toUpperCase()===codigo);
+  if(!r)return String(c['Instituto / País']||'').trim();
+  const cat=String(r['Categoría']||'').trim().toUpperCase();
+  if(cat==='EXT'||cat==='ACT')return String(r['País']||'').trim();
+  return String(r['Instituto']||r['Organismo']||'').trim();
+}
 const LOTE_HEADERS_NOMINA=['DNI'];
 const LOTE_HEADERS_CURSANTE=['DNI','APELLIDO Y NOMBRES'];
 function modoLote(){return $('loteModo').value||'NOMINA';}
