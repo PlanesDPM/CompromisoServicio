@@ -1320,7 +1320,7 @@ table.data{max-width:100%}
  #tablaNom tbody{display:table-row-group!important}
  #tablaNom tr{display:table-row!important}
  #tablaNom th,#tablaNom td{display:table-cell!important;max-width:0!important;min-width:0!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal;font-size:clamp(9px,.77vw,12px)!important;padding:6px 4px!important;vertical-align:top}
- #tablaNom th:nth-child(1){width:4%}#tablaNom th:nth-child(2){width:5%}#tablaNom th:nth-child(3){width:13%}#tablaNom th:nth-child(4){width:8%}#tablaNom th:nth-child(5){width:16%}#tablaNom th:nth-child(6){width:8%}#tablaNom th:nth-child(7){width:5%}#tablaNom th:nth-child(8){width:7%}#tablaNom th:nth-child(9){width:7%}#tablaNom th:nth-child(10){width:9%}#tablaNom th:nth-child(11){width:6%}#tablaNom th:nth-child(12){width:12%}
+ #tablaNom th:nth-child(1){width:4%}#tablaNom th:nth-child(2){width:5%}#tablaNom th:nth-child(3){width:13%}#tablaNom th:nth-child(4){width:8%}#tablaNom th:nth-child(5){width:16%}#tablaNom th:nth-child(6){width:8%}#tablaNom th:nth-child(7){width:5%}#tablaNom th:nth-child(8){width:7%}#tablaNom th:nth-child(9){width:7%}#tablaNom th:nth-child(10){width:9%}#tablaNom th:nth-child(11){width:18%}
  #tablaNom tbody td::before{content:none!important}
  #tablaNom .acts{display:flex;flex-wrap:wrap;gap:3px}
  #tablaNom .acts button{padding:3px 4px;font-size:10px;min-height:24px}
@@ -1485,7 +1485,13 @@ table.data{max-width:100%}
 #p-inicio .inicio-gestion-org{color:#f1d477}
 @media(min-width:901px) and (max-height:720px){#p-inicio .inicio-gestion-btn{padding-top:22px;padding-bottom:4px;gap:3px}#p-inicio .inicio-gestion-num{top:4px;left:7px;font-size:19px}}
 </style>
-</head>
+<style>/* v1.99: seguimiento compacto */
+.cs-seguimiento-tabla table{min-width:0;width:100%;table-layout:fixed;font-size:12px}
+.cs-seguimiento-tabla th,.cs-seguimiento-tabla td{white-space:normal;overflow-wrap:anywhere;padding:7px 5px;vertical-align:middle}
+.cs-seguimiento-tabla th:nth-child(2){width:14%}.cs-seguimiento-tabla th:nth-child(4){width:13%}.cs-seguimiento-tabla th:nth-child(7){width:12%}.cs-seguimiento-tabla th:nth-child(6){width:5%}.cs-seguimiento-tabla th:nth-child(1){width:5%}
+.cs-seguimiento-tabla .badge{white-space:normal;max-width:100%}
+@media(max-width:900px){.cs-seguimiento-tabla table{min-width:1000px;table-layout:auto}}
+</style></head>
 <body>
 
 <!-- ================= ACCESO ================= -->
@@ -1537,7 +1543,7 @@ table.data{max-width:100%}
       <div class="srv-estado" id="srvEstado"><span class="dot"></span><span id="srvTexto">Verificando servidor…</span></div>
       <div class="srv-alerta hidden" id="srvAlerta"></div>
       <div class="login-foot">Dirección de Personal Militar · Información reservada, uso interno exclusivo</div>
-      <div class="cs-index-version" title="Identifica el archivo HTML publicado">Interfaz v1.97 · Servidor requerido v1.58</div>
+      <div class="cs-index-version" title="Identifica el archivo HTML publicado">Interfaz v2.00 · Servidor requerido v1.58</div>
     </div>
   </div>
 </section>
@@ -1558,7 +1564,7 @@ table.data{max-width:100%}
 <section id="view-app" class="view">
   <header class="bar">
     <div class="bar-top">
-      <div class="bar-title"><img data-escudo src="" alt=""><div><p class="kicker">Departamento Planes - DPM · Sistema de Control de Compromisos de Servicio</p><h1 id="appTitulo">Inicio</h1><div class="cs-index-version cs-index-version-app" title="Identifica el archivo HTML publicado">Interfaz v1.97</div></div></div>
+      <div class="bar-title"><img data-escudo src="" alt=""><div><p class="kicker">Departamento Planes - DPM · Sistema de Control de Compromisos de Servicio</p><h1 id="appTitulo">Inicio</h1><div class="cs-index-version cs-index-version-app" title="Identifica el archivo HTML publicado">Interfaz v2.00</div></div></div>
       <div class="user-info">
         <span class="user-info-text" id="userInfo"></span>
         <button type="button" class="hbtn gold" id="btnActualizar">↻ Actualizar datos</button>
@@ -1927,7 +1933,6 @@ table.data{max-width:100%}
             <th class="sortable num" data-k="GIE (M)">Monto (M)<span class="sm"></span></th>
             <th class="sortable num" data-k="_saldo">Saldo (M)<span class="sm"></span></th>
             <th class="sortable" data-k="_sit">Estado / Situación<span class="sm"></span></th>
-            <th>Doc.</th>
             <th>Acciones</th>
           </tr></thead>
           <tbody id="nomBody"></tbody>
@@ -2074,7 +2079,7 @@ table.data{max-width:100%}
       <p class="hint">Registre la situación del pago. Las actuaciones judiciales y la incorporación a Veraz son opciones independientes y deben tener su fecha real.</p>
       <div class="cols c-2">
         <div class="field"><label for="estFechaRescision">Fecha de rescisión <span class="req">*</span></label><input id="estFechaRescision" type="date"></div>
-        <div class="field"><label for="estSituacionPago">Situación de pago <span class="req">*</span></label><select id="estSituacionPago"><option value="">Seleccione...</option><option>Pendiente de aceptación</option><option>Aceptó la deuda</option><option>Rehusó el pago</option><option>En proceso de pago</option><option>Deuda cancelada</option></select></div>
+        <div class="field"><label for="estSituacionPago">Situación de pago <span class="req">*</span></label><select id="estSituacionPago"><option value="">Seleccione...</option><option>Pendiente de aceptación</option><option value="Aceptó la deuda">Aceptó</option><option value="Rehusó el pago">No aceptó</option><option value="En proceso de pago">En proceso de pago</option><option>Deuda cancelada</option></select></div>
       </div>
       <div class="cs-actuaciones-checks">
         <label><input type="checkbox" id="estJudicial"> En proceso judicial</label>
@@ -2102,7 +2107,7 @@ table.data{max-width:100%}
       <button type="button" class="small-btn navy" id="segExcel">⬇ Exportar Excel</button>
     </div>
     <p class="hint">Las fechas y los días transcurridos corresponden a cada actuación. Los casos sin seguimiento completo se indican como pendientes de carga. Se incluyen los antecedentes cerrados en el filtro «Todos».</p>
-    <div class="table-wrap cs-seguimiento-tabla"><table class="data"><thead><tr><th>CS N.º</th><th>Grado</th><th>Causante</th><th>DNI</th><th>Tipo / CCRBA</th><th>Estado CS</th><th>Fecha rescisión</th><th>Días</th><th>Situación de pago</th><th>Judicial</th><th>Fecha judicial</th><th>Días</th><th>Veraz</th><th>Fecha Veraz</th><th>Días</th><th>Expediente</th><th>Cierre</th><th>Acciones</th></tr></thead><tbody id="segBody"></tbody></table></div>
+    <div class="table-wrap cs-seguimiento-tabla"><table class="data"><thead><tr><th>Grado</th><th>Causante</th><th>DNI</th><th>Tipo</th><th>Fecha de rescisión</th><th>Días</th><th>Situación</th><th>Judicializado</th><th>Desde cuándo / días</th><th>Veraz</th><th>Desde cuándo / días</th><th>Acciones</th></tr></thead><tbody id="segBody"></tbody></table></div>
   </div>
   <div class="modal-foot"><span class="hint">Datos según registros del sistema.</span><div class="btns"><button type="button" class="secondary" data-close>Cerrar</button></div></div>
 </div></div>
@@ -3349,22 +3354,36 @@ function renderReferenciasInicio(){
  btn.classList.toggle('hidden',!(puede('presupuestacion')||esVisor()));
 }
 $('btnVerDatosInicio').onclick=()=>{if(puede('presupuestacion')||esVisor())entrarCircuito('politica');};
+function fechaSeguimiento(v){
+  const t=String(v??'').trim(); let m=t.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:$|T| )/), y,mes,d;
+  if(m){[,y,mes,d]=m;}else if((m=t.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})(?:$| )/))){[,d,mes,y]=m;}else if(/^\d{5}(?:\.\d+)?$/.test(t)){return new Date(Date.UTC(1899,11,30)+Math.floor(Number(t))*86400000).toISOString().slice(0,10);}else{return '';}
+  const f=y+'-'+mes.padStart(2,'0')+'-'+d.padStart(2,'0');const n=new Date(f+'T00:00:00Z');return Number.isFinite(n.getTime())&&n.toISOString().slice(0,10)===f?f:'';
+}
 function diasDesdeSeguimiento(fecha){
-  const t=String(fecha||'').slice(0,10);
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(t))return '';
-  const n=Date.parse(t+'T00:00:00Z'),actual=Date.parse(hoy()+'T00:00:00Z');
-  return Number.isFinite(n)&&actual>=n?Math.floor((actual-n)/86400000):'';
+  const t=fechaSeguimiento(fecha), actual=fechaSeguimiento(hoy())||hoyISO();
+  if(!t)return '';const n=Date.parse(t+'T00:00:00Z'), a=Date.parse(actual+'T00:00:00Z');return a>=n?Math.floor((a-n)/86400000):'';
+}
+function claveSeguimiento(v){return sinAcentos(v).toLowerCase().replace(/[^a-z0-9]/g,'');}
+function normalizarSeguimiento(x){
+  const k=Object.fromEntries(Object.entries(x||{}).map(([a,b])=>[claveSeguimiento(a),b]));
+  const get=(...keys)=>{for(const a of keys){const v=k[claveSeguimiento(a)];if(v!==undefined&&v!==null&&v!=='')return v;}return '';};
+  const siNo=v=>{const t=claveSeguimiento(v);return ['si','true','1','yes'].includes(t)?'SI':['no','false','0'].includes(t)?'NO':'';};
+  const situ=get('Situación Pago','Situación de pago','situacion','situacionPago');const st=claveSeguimiento(situ);
+  return {...x,'Nro CS':get('Nro CS','Nro','nroCS'),'Fecha Rescisión':fechaSeguimiento(get('Fecha Rescisión','fechaRescision','Fecha de rescisión')),
+    'Situación Pago':({'acepto':'Aceptó la deuda','aceptoladeuda':'Aceptó la deuda','noacepto':'Rehusó el pago','rehusoelpago':'Rehusó el pago','enprocesodepago':'En proceso de pago','deudacancelada':'Deuda cancelada','pendientedeaceptacion':'Pendiente de aceptación'})[st]||situ,
+    'En Proceso Judicial':siNo(get('En Proceso Judicial','Judicializado','judicial')),'Fecha Inicio Judicial':fechaSeguimiento(get('Fecha Inicio Judicial','Fecha Judicial','fechaJudicial')),
+    'Informado Veraz':siNo(get('Informado Veraz','Veraz','En Veraz')),'Fecha Alta Veraz':fechaSeguimiento(get('Fecha Alta Veraz','Fecha Veraz','fechaVeraz')),
+    'Expediente / Documento':get('Expediente / Documento','expediente'),'Observaciones':get('Observaciones','observaciones'),'Fecha Cierre':fechaSeguimiento(get('Fecha Cierre'))};
 }
 function casosSeguimiento(){
   if(!S.d)return [];
-  const mapa=new Map(((S.d.seguimiento)||[]).map(x=>[String(x['Nro CS']),x]));
-  return ((S.d.cs)||[]).filter(c=>['Rescindido','En Proceso de Pago'].includes(String(c['Estado']))||mapa.has(String(c['Nro']))).map(c=>{
+  const mapa=new Map((Array.isArray(S.d.seguimiento)?S.d.seguimiento:[]).map(normalizarSeguimiento).map(x=>[String(x['Nro CS']),x]));
+  return (S.d.cs||[]).filter(c=>['Rescindido','En Proceso de Pago'].includes(String(c['Estado']))||mapa.has(String(c['Nro']))).map(c=>{
     const s=mapa.get(String(c['Nro']))||{};
-    return {c,s,abierto:String(s['Situación Pago']||'')!=='Deuda cancelada',
-      fecha:String(s['Fecha Rescisión']||'').slice(0,10),
-      judicial:String(s['En Proceso Judicial']||''),veraz:String(s['Informado Veraz']||'')};
+    return {c,s,abierto:s['Situación Pago']!=='Deuda cancelada',fecha:s['Fecha Rescisión']||'',judicial:s['En Proceso Judicial']||'',veraz:s['Informado Veraz']||''};
   }).sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha))||Number(b.c['Nro'])-Number(a.c['Nro']));
 }
+function situacionSeguimiento(c,s){return ({'Aceptó la deuda':'Aceptó','Rehusó el pago':'No aceptó'})[s['Situación Pago']]||s['Situación Pago']||(c['Estado']==='En Proceso de Pago'?'En proceso de pago':'Sin datos registrados');}
 function renderSeguimientoInicio(){
   const casos=casosSeguimiento();
   $('iniSeguimientoTotal').textContent=String(casos.filter(x=>x.abierto).length);
@@ -3387,7 +3406,7 @@ function seguimientoExcelFilas(){
     'Tipo CS':c['Tipo CS']||'', 'CCRBA / Actividad':c['CCRBA']||'',
     'Código CCRBA':c['Código CCRBA']||'','Estado CS':c['Estado']||'',
     'Fecha Rescisión':fecha, 'Días desde rescisión':diasDesdeSeguimiento(fecha),
-    'Situación Pago':s['Situación Pago']||'Pendiente de completar',
+    'Situación Pago':situacionSeguimiento(c,s),
     'En Proceso Judicial':s['En Proceso Judicial']||'No informado',
     'Fecha Inicio Judicial':s['Fecha Inicio Judicial']||'',
     'Días desde inicio judicial':diasDesdeSeguimiento(s['Fecha Inicio Judicial']),
@@ -3404,19 +3423,12 @@ function renderTablaSeguimiento(){
   const lista=filasSeguimientoVisibles();
   $('segConteo').textContent=lista.length+' casos';
   $('segBody').innerHTML=lista.length?lista.map(({c,s,fecha})=>{
-    const sub=(f)=>f?fmtFecha(f):'—';
-    const dias=(f)=>{const d=diasDesdeSeguimiento(f);return d===''?'—':String(d);};
-    return '<tr>'+[
-      esc(c['Nro']),esc(c['Grado']),'<strong>'+esc(c['Apellido y Nombres'])+'</strong>',
-      esc(c['DNI']),'<span class="cs-seg-curso">'+esc(c['CCRBA']||c['Tipo CS']||'')+'</span>',
-      esc(c['Estado']),sub(fecha),dias(fecha),
-      badge(s['Situación Pago']||'Pendiente de completar',s['Situación Pago']==='Deuda cancelada'?'green':s['Situación Pago']==='Rehusó el pago'?'red':'yellow'),
-      esc(s['En Proceso Judicial']||'—'),sub(s['Fecha Inicio Judicial']),dias(s['Fecha Inicio Judicial']),
-      esc(s['Informado Veraz']||'—'),sub(s['Fecha Alta Veraz']),dias(s['Fecha Alta Veraz']),
-      esc(s['Expediente / Documento']||'—'),sub(s['Fecha Cierre']),
-      puedeGestionEstadoCS()?'<button type="button" class="small-btn navy" data-seg-edit="'+esc(c['Nro'])+'">Gestionar</button>':'—'
-    ].map(z=>'<td>'+z+'</td>').join('')+'</tr>';
-  }).join(''):'<tr><td colspan="18"><div class="empty">No hay casos registrados para los filtros seleccionados.</div></td></tr>';
+    const sub=f=>f?esc(fmtFecha(f)):'—';
+    const dias=f=>{const d=diasDesdeSeguimiento(f);return d===''?'—':String(d);};
+    const desde=(estado,f)=>estado==='SI'?(f?sub(f)+'<br><small>'+dias(f)+' días</small>':'Sin fecha registrada'):'—';
+    const situ=situacionSeguimiento(c,s);
+    return '<tr>'+[esc(c['Grado']),'<strong>'+esc(c['Apellido y Nombres'])+'</strong>',esc(c['DNI']),esc(c['Tipo CS']||c['CCRBA']),sub(fecha),dias(fecha),badge(situ,situ==='Deuda cancelada'?'green':situ==='No aceptó'?'red':'yellow'),esc(s['En Proceso Judicial']||'Sin datos'),desde(s['En Proceso Judicial'],s['Fecha Inicio Judicial']),esc(s['Informado Veraz']||'Sin datos'),desde(s['Informado Veraz'],s['Fecha Alta Veraz']),puedeGestionEstadoCS()?'<button type="button" class="small-btn navy" data-seg-edit="'+esc(c['Nro'])+'">Gestionar</button>':'—'].map(z=>'<td>'+z+'</td>').join('')+'</tr>';
+  }).join(''):'<tr><td colspan="12"><div class="empty">No hay casos registrados para los filtros seleccionados.</div></td></tr>';
 }
 $('btnCasosSeguimientoInicio').onclick=()=>{if(!puede('ver'))return;$('segBuscar').value='';$('segFiltro').value='abiertos';renderTablaSeguimiento();abrirModal('mCasosSeguimiento');};
 $('segBuscar').addEventListener('input',renderTablaSeguimiento);
@@ -4158,12 +4170,11 @@ function renderNominal(){
       '<td>'+fmtFecha(c['Fecha Vencimiento'])+'</td>'+
       '<td class="num">'+esc(c['Meses'])+'</td><td class="num">'+fmtNum(c['GIE (M)'])+'</td><td class="num">'+(c['Estado']==='Vigente'?fmtNum(a.saldo):'—')+'</td>'+
       '<td>'+badge(c['Estado']||'—',c['Estado']==='Vigente'?'green':c['Estado']==='Rescindido'?'red':c['Estado']==='En Proceso de Pago'?'yellow':'navy')+(a.sitTxt&&a.sitTxt!==c['Estado']?'<div class="hint">'+esc(a.sitTxt)+'</div>':'')+'</td>'+
-      '<td><span class="doc '+(c['Original Papel']?'si':'no')+'" title="Original en papel">PAPEL</span><span class="doc '+(c['GDE Digital']?'si':'no')+'" title="Ejemplar digital GDE">GDE</span></td>'+
       '<td><div class="acts"><button class="small-btn" data-ver="'+esc(c['Nro'])+'">Ver</button>'+
         ((pEdit&&(pTodos||propio))?'<button class="small-btn navy" data-edit="'+esc(c['Nro'])+'">Editar</button>':'')+
         (pEst?'<button class="small-btn" data-est="'+esc(c['Nro'])+'">Estado</button>':'')+
         (puedeEliminarCS(c)?'<button class="small-btn danger" data-elcs="'+esc(c['Nro'])+'">Eliminar</button>':'')+'</div></td></tr>';
-  }).join('') : '<tr><td colspan="12"><div class="empty">No hay Compromisos de Servicio para los filtros seleccionados.</div></td></tr>';
+  }).join('') : '<tr><td colspan="11"><div class="empty">No hay Compromisos de Servicio para los filtros seleccionados.</div></td></tr>';
   $('nomCount').textContent=filas.length+' registro(s) · Saldo total '+fmtM(filas.reduce((s,c)=>s+c._a.saldo,0))+(modulo()?' ≈ '+fmtPesos(filas.reduce((s,c)=>s+c._a.saldo,0)*modulo().valor):'');
 }
 $('nomBody').addEventListener('click',e=>{
@@ -4197,7 +4208,7 @@ const EST_HINT={
   'En Proceso de Pago':'Registre expediente respaldatorio y actualice las actuaciones de seguimiento.'
 };
 let estNro=null;
-function seguimientoCS(nro){return ((S.d&&S.d.seguimiento)||[]).find(x=>String(x['Nro CS'])===String(nro))||null;}
+function seguimientoCS(nro){return (Array.isArray(S.d?.seguimiento)?S.d.seguimiento:[]).map(normalizarSeguimiento).find(x=>String(x['Nro CS'])===String(nro))||null;}
 function visibilidadActuaciones(){
   $('wrapEstFechaJudicial').classList.toggle('hidden',!$('estJudicial').checked);
   $('wrapEstFechaVeraz').classList.toggle('hidden',!$('estVeraz').checked);
@@ -4238,8 +4249,8 @@ $('estSel').onchange=()=>{
 };
 function obtenerFormularioSeguimiento(){
   return {fechaRescision:$('estFechaRescision').value,situacion:$('estSituacionPago').value,
-    judicial:$('estJudicial').checked,fechaJudicial:$('estFechaJudicial').value,
-    veraz:$('estVeraz').checked,fechaVeraz:$('estFechaVeraz').value,
+    judicial:$('estJudicial').checked,fechaJudicial:$('estJudicial').checked?$('estFechaJudicial').value:'',
+    veraz:$('estVeraz').checked,fechaVeraz:$('estVeraz').checked?$('estFechaVeraz').value:'',
     expediente:$('estExpedienteSeguimiento').value.trim(),observaciones:$('estObservacionesSeguimiento').value.trim()};
 }
 function validarFormularioSeguimiento(c,seg){
@@ -4247,7 +4258,9 @@ function validarFormularioSeguimiento(c,seg){
   if(!seg.situacion)return 'Seleccione la situación de pago.';
   if(seg.judicial&&!seg.fechaJudicial)return 'Indique la fecha de inicio del proceso judicial.';
   if(seg.veraz&&!seg.fechaVeraz)return 'Indique la fecha de incorporación a Veraz.';
-  if(seg.fechaRescision>hoy())return 'La fecha de rescisión no puede ser futura.';
+  if(seg.judicial&&(seg.fechaJudicial<seg.fechaRescision||seg.fechaJudicial>(fechaSeguimiento(hoy())||hoyISO())))return 'La fecha judicial debe estar entre la rescisión y hoy.';
+  if(seg.veraz&&(seg.fechaVeraz<seg.fechaRescision||seg.fechaVeraz>(fechaSeguimiento(hoy())||hoyISO())))return 'La fecha de Veraz debe estar entre la rescisión y hoy.';
+  if(seg.fechaRescision>(fechaSeguimiento(hoy())||hoyISO()))return 'La fecha de rescisión no puede ser futura.';
   if(c&&String(c['Fecha Vencimiento']||'').slice(0,10)&&seg.fechaRescision>=String(c['Fecha Vencimiento']).slice(0,10))return 'La rescisión temprana debe preceder al vencimiento del CS.';
   return '';
 }
@@ -4265,8 +4278,13 @@ $('btnEstOk').onclick=async()=>{
   if(seg){const error=validarFormularioSeguimiento(c,seg);if(error)return msg('estMsg',error,'err');}
   $('btnEstOk').disabled=true;msg('estMsg','Guardando…');
   try{
+    const ping=await api('ping');if(String(ping.version)!==VERSION_SISTEMA)throw new Error('Actualice el servidor a la versión '+VERSION_SISTEMA+' antes de guardar.');
     const r=await api('estadoCS',{nro:estNro,estado,motivo,seguimiento:seg});
-    cerrarModal('mEstado');await cargarDatos(true);aviso(r.mensaje,'Estado y seguimiento actualizados');
+    // Verificar contra una respuesta nueva del servidor, no contra datos locales.
+    const d=await api('datos');S.d=d;S.usuario=d.usuario;S.permisos=d.permisos;aplicarPermisos();renderTodo();
+    if(seg){const v=seguimientoCS(estNro);const ok=v&&v['Fecha Rescisión']===seg.fechaRescision&&v['Situación Pago']===seg.situacion&&v['En Proceso Judicial']===(seg.judicial?'SI':'NO')&&v['Informado Veraz']===(seg.veraz?'SI':'NO')&&(!seg.judicial||v['Fecha Inicio Judicial']===seg.fechaJudicial)&&(!seg.veraz||v['Fecha Alta Veraz']===seg.fechaVeraz);
+      if(!ok)return msg('estMsg','El servidor no devolvió todos los datos de seguimiento guardados. Verifique el Código GS antes de repetir la carga.','err');}
+    cerrarModal('mEstado');aviso(r.mensaje,'Estado y seguimiento actualizados');
   }catch(e){msg('estMsg',e.message,'err');}finally{$('btnEstOk').disabled=false;}
 };
 
@@ -4302,7 +4320,7 @@ const NOM_COLUMNAS=[
  ['Inicio','Inicio Vigencia',c=>fmtFecha(c['Inicio Vigencia'])],['Vencimiento','Fecha Vencimiento',c=>fmtFecha(c['Fecha Vencimiento'])],['Meses','Meses',c=>num(c['Meses'])],
  ['Monto','Monto (M)',c=>num(c['GIE (M)'])],['Cumplidos','Meses cumplidos',c=>c._a.cumplidos],['Saldo','Saldo (M)',c=>c._a.saldo],
  ['SaldoPesos','Saldo $ (Módulo vigente)',c=>modulo()?Math.round(c._a.saldo*modulo().valor):''],['Situacion','Situación',c=>c._a.sitTxt],
- ['Estado','Estado',c=>c['Estado']],['Papel','Original Papel',c=>fmtFecha(c['Original Papel'])],['GDE','GDE Digital',c=>c['GDE Digital']],['Observaciones','Observaciones',c=>c['Observaciones']]
+ ['Estado','Estado',c=>c['Estado']],['Observaciones','Observaciones',c=>c['Observaciones']]
 ];
 function prepararNomExport(){
  const elegidos=new Set(['Nro','Grado','Nombre','DNI','CCRBA','Código','Inicio','Vencimiento','Meses','Monto','Saldo','Estado']);
