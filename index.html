@@ -890,7 +890,7 @@ footer.foot{padding:8px 14px}
 #p-inicio .inicio-grafico-compacto{position:relative;flex:1 1 0;min-height:0;margin:4px 0 1px;overflow:hidden}
 #p-inicio .inicio-grafico-compacto canvas{width:100%!important;height:100%!important}
 #p-inicio .inicio-analitica-card .inicio-fuente{flex:0 0 auto;margin-top:2px;font:10px/1.2 Arial,sans-serif;color:#63718a;min-height:0}
-#p-inicio #chCsFirmadosInicio{cursor:default}
+#p-inicio #chCsFirmadosInicio{cursor:pointer}
 @media(min-width:901px) and (max-height:710px){
  #p-inicio .inicio-analitica-doble{gap:5px}
  #p-inicio .inicio-analitica-card{padding:4px 5px 3px}
@@ -1467,6 +1467,12 @@ table.data{max-width:100%}
 .cs-actuaciones-checks input{width:auto}
 #mEstado .modal{width:min(94vw,790px);max-height:88dvh;overflow:auto}
 @media(max-width:800px){.cs-rescision-ayuda{left:0;top:100%;width:min(340px,90vw)}#p-inicio .inicio-sidebar{max-height:none;overflow:visible}.cs-seguimiento-indicador{align-items:center;flex-wrap:wrap}.cs-seguimiento-form .cols{grid-template-columns:1fr}}
+/* v1.96 */
+.cs-accesos-seguimiento{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;flex:0 0 auto}
+.cs-accesos-seguimiento:has(#bloqueRescisionInicio.hidden){grid-template-columns:1fr}
+.cs-accesos-seguimiento .cs-seguimiento-indicador{height:100%;min-width:0;gap:8px;padding:8px 12px}
+#mCSFirmadosInicio table th,#mCSFirmadosInicio table td{white-space:normal;overflow-wrap:anywhere;min-width:0;max-width:none}
+@media(max-width:700px){.cs-accesos-seguimiento{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1520,7 +1526,7 @@ table.data{max-width:100%}
       <div class="srv-estado" id="srvEstado"><span class="dot"></span><span id="srvTexto">Verificando servidor…</span></div>
       <div class="srv-alerta hidden" id="srvAlerta"></div>
       <div class="login-foot">Dirección de Personal Militar · Información reservada, uso interno exclusivo</div>
-      <div class="cs-index-version" title="Identifica el archivo HTML publicado">Interfaz v1.95 · Servidor requerido v1.58</div>
+      <div class="cs-index-version" title="Identifica el archivo HTML publicado">Interfaz v1.96 · Servidor requerido v1.58</div>
     </div>
   </div>
 </section>
@@ -1541,7 +1547,7 @@ table.data{max-width:100%}
 <section id="view-app" class="view">
   <header class="bar">
     <div class="bar-top">
-      <div class="bar-title"><img data-escudo src="" alt=""><div><p class="kicker">Departamento Planes - DPM · Sistema de Control de Compromisos de Servicio</p><h1 id="appTitulo">Inicio</h1><div class="cs-index-version cs-index-version-app" title="Identifica el archivo HTML publicado">Interfaz v1.95</div></div></div>
+      <div class="bar-title"><img data-escudo src="" alt=""><div><p class="kicker">Departamento Planes - DPM · Sistema de Control de Compromisos de Servicio</p><h1 id="appTitulo">Inicio</h1><div class="cs-index-version cs-index-version-app" title="Identifica el archivo HTML publicado">Interfaz v1.96</div></div></div>
       <div class="user-info">
         <span class="user-info-text" id="userInfo"></span>
         <button type="button" class="hbtn gold" id="btnActualizar">↻ Actualizar datos</button>
@@ -1626,10 +1632,6 @@ table.data{max-width:100%}
         <div class="seal-label">DIR PERS MIL</div>
         <button type="button" id="btnMisionesInicio" class="misiones-inicio-btn" aria-haspopup="dialog" aria-controls="mMisiones">Misiones y responsabilidades</button>
         <button type="button" id="btnUsuariosInicio" class="org-chip-usuarios hidden">Usuarios</button>
-        <div class="cs-rescision-acceso hidden" id="bloqueRescisionInicio">
-          <button type="button" id="btnRescisionInicio" class="org-chip-usuarios" title="Abrir Consulta de Compromisos, localizar el CS, pulsar Estado y registrar rescisión, pago y actuaciones judiciales o Veraz. Solo Programador y Política Salarial." aria-describedby="ayudaRescisionInicio">Rescisión temprana de CS ⓘ</button>
-          <div class="cs-rescision-ayuda" id="ayudaRescisionInicio" role="tooltip">Seleccione esta opción para ingresar a Consulta de Compromisos. Busque el CS, presione «Estado» y registre su rescisión, situación de pago y actuaciones judiciales o Veraz. Solo Programador o Política Salarial pueden modificar esos datos.</div>
-        </div>
         <button type="button" id="btnGenerarWordInicio" class="ia-link-card word-link-card hidden" title="Generar compromiso de servicio en Word">
           <img src="data:image/webp;base64,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" alt="Ícono de nuevo documento para generar un Compromiso de Servicio en Word">
           <span class="ia-link-text">Generar CS en Word</span>
@@ -1641,15 +1643,7 @@ table.data{max-width:100%}
         <section class="inicio-instructivos">
           <span class="inicio-aside-label">DOCUMENTACIÓN</span>
           <h3>Instructivos y Formularios</h3>
-          <div class="cs-doc-links" id="documentosAccesoRapido">
-            <button type="button" class="cs-doc-link" data-descargar-cs="0">↓ Instructivo del Usuario</button>
-            <button type="button" class="cs-doc-link" data-descargar-cs="3">↓ Decreto del Poder Ejecutivo Nacional</button>
-            <button type="button" class="cs-doc-link" data-descargar-cs="1">↓ Modelo de Inicio de Curso</button>
-            <button type="button" class="cs-doc-link" data-descargar-cs="2">↓ Modelo de CS por Curso, Actividad, Beca o Residencia</button>
-            <button type="button" class="cs-doc-link" data-descargar-cs="4">↓ Acta de Aceptación o Negación de Deuda</button>
-            <button type="button" class="cs-doc-link" data-descargar-cs="5">↓ Modelo de CS por Ascenso</button>
-          </div>
-          <button type="button" id="btnInicioInstructivos">Ver todos los formularios</button>
+          <button type="button" id="btnInicioInstructivos" aria-haspopup="dialog" aria-controls="mInstructivos">Ver instructivos y formularios</button>
         </section>
       </aside>
       <section class="inicio-center inicio-main">
@@ -1665,10 +1659,15 @@ table.data{max-width:100%}
           </div>
           <button type="button" id="btnVerDatosInicio" class="inicio-valores-accion hidden" title="Ir a Datos de Base para consultar o actualizar">Ver datos<br>de base</button>
         </div>
+        <div class="cs-accesos-seguimiento">
         <button type="button" id="btnCasosSeguimientoInicio" class="cs-seguimiento-indicador" aria-haspopup="dialog" aria-controls="mCasosSeguimiento">
           <span><strong>Casos en seguimiento</strong><small>Rescisiones anticipadas · situación de pago, actuaciones judiciales y Veraz</small></span>
           <span class="cs-seguimiento-num" id="iniSeguimientoTotal">0</span><span aria-hidden="true">↗</span>
         </button>
+        <div id="bloqueRescisionInicio" class="hidden">
+          <button type="button" id="btnRescisionInicio" class="cs-seguimiento-indicador"><span><strong>Rescisión anticipada de CS</strong><small>Acceso al listado de CS para registrar la rescisión.</small></span><span aria-hidden="true">↗</span></button>
+        </div>
+        </div>
         <div class="inicio-two-cols">
           <section class="inicio-seccion">
             <button class="acceso-cs" type="button" id="btnInicioAscenso">
@@ -2218,7 +2217,12 @@ table.data{max-width:100%}
 </div></div>
 
 
-<!-- Instructivos y Formularios - cinco archivos Word adjuntos por el usuario -->
+<div class="modal-overlay" id="mCSFirmadosInicio"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="csFirmadosTitulo" style="width:min(1200px,96vw)">
+ <div class="modal-head"><div><p class="modal-kicker">Resumen de CS firmados</p><h2 id="csFirmadosTitulo"></h2><p id="csFirmadosSubtitulo" style="margin:4px 0 0;color:#667085"></p></div><button type="button" class="modal-x" data-close aria-label="Cerrar">×</button></div>
+ <div class="modal-body"><div class="table-wrap"><table class="data" style="width:100%;table-layout:fixed"><thead><tr><th>Grado</th><th>Apellido y nombres</th><th>DNI</th><th>Destino</th><th>Tipo CS</th><th>CCRBA</th><th>Estado</th></tr></thead><tbody id="csFirmadosCuerpo"></tbody></table></div></div>
+ <div class="modal-foot"><span>Un registro por compromiso de servicio.</span><div class="btns"><button type="button" class="secondary" data-close>Cerrar</button></div></div>
+</div></div>
+<!-- Instructivos y Formularios -->
 <div class="modal-overlay" id="mInstructivos" role="presentation">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloInstructivos">
     <div class="modal-head">
@@ -2959,7 +2963,7 @@ $('btnGeneracionVolver').onclick=()=>irA('inicio');
 /* Accesos de la pantalla inicial: dos circuitos diferenciados. */
 $('btnInicioAscenso').onclick=()=>{irA('ascenso');consultarAscensos(false);};
 $('btnUsuariosInicio').onclick=()=>{if(esVisor()||(esProgramador()&&puede('usuarios')))entrarCircuito('usuarios');};
-$('btnRescisionInicio').onclick=()=>{if(!puedeGestionEstadoCS())return aviso('Solo Programador o Política Salarial pueden cambiar estados.');entrarCircuito('listados');$('nomBuscar').focus();};
+$('btnRescisionInicio').onclick=()=>{if(!puedeGestionEstadoCS())return aviso('Solo Programador o Política Salarial pueden cambiar estados.');entrarCircuito('listados');$('nomBuscar').focus();aviso('Busque el Compromiso de Servicio correspondiente.\n1. Pulse «Estado».\n2. Seleccione «Rescindido».\n3. Complete los datos solicitados y guarde los cambios.','Rescisión anticipada de CS');};
 $('btnVisorIrListado').onclick=()=>entrarCircuito('listados');
 $('btnGestionRegistro').onclick=()=>{entrarCircuito('cursos');$('csTipo').value='CCRBA';$('csTipo').dispatchEvent(new Event('change'));}; $('btnGestionListados').onclick=()=>entrarCircuito('listados'); $('btnGestionIndividual').onclick=()=>{ $('indContenidoPopup').innerHTML=''; $('conDniPopup').value=''; msg('msgConsultaPopup',''); abrirModal('mConsultaIndividual'); $('conDniPopup').focus(); };
 $('btnConsultaMontosInicio').onclick=()=>{ if(!puede('ver'))return aviso('No tiene permisos para consultar Montos y Meses de CS.','Acceso restringido'); entrarCircuito('consultaMontos'); };
@@ -3166,11 +3170,10 @@ const INICIO_CAT_CODIGOS=['PAIS','EXT','ACT','RES'];
 const INICIO_CAT_ETIQUETAS=[['Cursos','país'],['Cursos','exterior'],['Actividades','exterior'],['Residencias']];
 const INICIO_CAT_COLORES=['#243f67','#4575a2','#7f9eb9','#c8a84b'];
 
-function contarCSFirmadosInicio(){
- const conteo={PAIS:0,EXT:0,ACT:0,RES:0};
+function registrosCSFirmadosInicio(){
  const cs=Array.isArray(S.d&&S.d.cs)?S.d.cs:[];
  const referencia=hoy();
- cs.forEach(c=>{
+ return cs.filter(c=>{
   if(String(c['Tipo CS']||'').trim().toUpperCase()!=='CCRBA')return; // No incluir CS por ascenso.
   // El backend mantiene Vigente tanto al personal ya incorporado como al que aún no inició.
   const estado=String(c['Estado']||'').trim().toUpperCase();
@@ -3181,11 +3184,28 @@ function contarCSFirmadosInicio(){
   // El registro y el estado determinan el conteo.
   const codigo=String(c['Código CCRBA']||'').trim().toUpperCase();
   const categoria=codigo.split('-')[0];
-  if(Object.prototype.hasOwnProperty.call(conteo,categoria))conteo[categoria]++;
+  return INICIO_CAT_CODIGOS.includes(categoria);
  });
- return INICIO_CAT_CODIGOS.map(cat=>conteo[cat]);
+}
+function contarCSFirmadosInicio(){
+ const rows=registrosCSFirmadosInicio();
+ return INICIO_CAT_CODIGOS.map(cat=>rows.filter(c=>String(c['Código CCRBA']||'').trim().toUpperCase().split('-')[0]===cat).length);
+}
+function abrirCSFirmadosInicio(cat){
+ const rows=registrosCSFirmadosInicio().filter(c=>String(c['Código CCRBA']||'').trim().toUpperCase().split('-')[0]===cat).sort((a,b)=>String(a['Apellido y Nombres']||'').localeCompare(String(b['Apellido y Nombres']||''),'es'));
+ $('csFirmadosTitulo').textContent=INI_CATS.find(x=>x[0]===cat)?.[1]||cat;
+ $('csFirmadosSubtitulo').textContent=rows.length+' CS firmados · vigentes y por iniciar';
+ $('csFirmadosCuerpo').innerHTML=rows.length?rows.map(c=>'<tr>'+['Grado','Apellido y Nombres','DNI','Unidad de Revista','Tipo CS','CCRBA','Estado'].map(k=>'<td class="wrap">'+esc(c[k]||'—')+'</td>').join('')+'</tr>').join(''):'<tr><td colspan="7">No hay compromisos en esta categoría.</td></tr>';
+ abrirModal('mCSFirmadosInicio');
+
 }
 
+$('chCsFirmadosInicio').addEventListener('click',e=>{
+ const chart=S.charts&&S.charts.chCsFirmadosInicio;
+ if(!chart)return;
+ const items=chart.getElementsAtEventForMode(e,'nearest',{intersect:true},false);
+ if(items.length)abrirCSFirmadosInicio(INICIO_CAT_CODIGOS[items[0].index]);
+});
 function opcionesGraficoResumenInicio(valores,leyenda){
  return {
   type:'bar',
@@ -3236,7 +3256,7 @@ const DOCUMENTOS_TITULOS = {
 };
 function abrirDocumentosCS(publicos){
   const orden=publicos?FORMULARIOS_PUBLICOS:FORMULARIOS_INTERNOS;
-  $('tituloInstructivos').textContent='Formularios de Compromiso de Servicio';
+  $('tituloInstructivos').textContent=publicos?'Formularios de Compromiso de Servicio':'Instructivos y Formularios';
   $('docsCantidad').textContent=orden.length+' documentos Word';
   $('listaDocumentosCS').innerHTML=orden.map((idx,i)=>
     '<div class="instructivos-fila"><span class="instructivos-num">'+(i+1)+'</span>'+ 
@@ -3262,10 +3282,7 @@ $('mInstructivos').addEventListener('click',e=>{
   const boton=e.target.closest('[data-documento-cs]');
   if(boton)descargarDocumentoCS(Number(boton.dataset.documentoCs));
 });
-$('documentosAccesoRapido').addEventListener('click',e=>{
-  const boton=e.target.closest('[data-descargar-cs]');
-  if(boton)descargarDocumentoCS(Number(boton.dataset.descargarCs));
-});
+
 async function consultarAscensos(forzar=true){
  const b=$('btnAscensoActualizar');b.disabled=true;
  $('ascensoAviso').className='notice info';$('ascensoAviso').textContent='Consultando la nómina de Suboficiales…';
