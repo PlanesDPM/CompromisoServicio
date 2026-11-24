@@ -1474,6 +1474,17 @@ table.data{max-width:100%}
 #mCSFirmadosInicio table th,#mCSFirmadosInicio table td{white-space:normal;overflow-wrap:anywhere;min-width:0;max-width:none}
 @media(max-width:700px){.cs-accesos-seguimiento{grid-template-columns:1fr}}
 </style>
+<style>
+/* v1.97 — accesos de Inicio: numeración y hover sin desplazamiento ni recorte. */
+#p-inicio .acceso-cs:hover,
+#p-inicio .inicio-gestion-btn:hover,
+#p-inicio .inicio-gestion-btn:focus-visible{transform:none;box-shadow:inset 0 0 0 1px #e4d3a2,0 5px 18px rgba(0,0,0,.15);border-color:#e4d3a2}
+#p-inicio .acceso-cs:focus-visible,#p-inicio .inicio-gestion-btn:focus-visible{outline:2px solid #e4d3a2;outline-offset:-3px}
+#p-inicio .inicio-gestion-btn{position:relative;padding-top:clamp(24px,3.8vh,32px);}
+#p-inicio .inicio-gestion-num{position:absolute;top:6px;left:9px;color:#fff;font:800 clamp(20px,3.2vh,29px)/1 Arial,Helvetica,sans-serif;pointer-events:none}
+#p-inicio .inicio-gestion-org{color:#f1d477}
+@media(min-width:901px) and (max-height:720px){#p-inicio .inicio-gestion-btn{padding-top:22px;padding-bottom:4px;gap:3px}#p-inicio .inicio-gestion-num{top:4px;left:7px;font-size:19px}}
+</style>
 </head>
 <body>
 
@@ -1526,7 +1537,7 @@ table.data{max-width:100%}
       <div class="srv-estado" id="srvEstado"><span class="dot"></span><span id="srvTexto">Verificando servidor…</span></div>
       <div class="srv-alerta hidden" id="srvAlerta"></div>
       <div class="login-foot">Dirección de Personal Militar · Información reservada, uso interno exclusivo</div>
-      <div class="cs-index-version" title="Identifica el archivo HTML publicado">Interfaz v1.96 · Servidor requerido v1.58</div>
+      <div class="cs-index-version" title="Identifica el archivo HTML publicado">Interfaz v1.97 · Servidor requerido v1.58</div>
     </div>
   </div>
 </section>
@@ -1547,7 +1558,7 @@ table.data{max-width:100%}
 <section id="view-app" class="view">
   <header class="bar">
     <div class="bar-top">
-      <div class="bar-title"><img data-escudo src="" alt=""><div><p class="kicker">Departamento Planes - DPM · Sistema de Control de Compromisos de Servicio</p><h1 id="appTitulo">Inicio</h1><div class="cs-index-version cs-index-version-app" title="Identifica el archivo HTML publicado">Interfaz v1.96</div></div></div>
+      <div class="bar-title"><img data-escudo src="" alt=""><div><p class="kicker">Departamento Planes - DPM · Sistema de Control de Compromisos de Servicio</p><h1 id="appTitulo">Inicio</h1><div class="cs-index-version cs-index-version-app" title="Identifica el archivo HTML publicado">Interfaz v1.97</div></div></div>
       <div class="user-info">
         <span class="user-info-text" id="userInfo"></span>
         <button type="button" class="hbtn gold" id="btnActualizar">↻ Actualizar datos</button>
@@ -1685,11 +1696,11 @@ table.data{max-width:100%}
           </section>
           <section class="inicio-seccion">
             <div class="inicio-accesos-gestion" aria-label="Accesos de compromisos de servicio">
-              <button type="button" class="inicio-gestion-btn" id="btnPoliticaInicio"><span class="inicio-gestion-org">DPM - Política Salarial</span><strong>Carga de Datos Básicos (Haberes - $ Módulo - GIE)</strong></button>
-              <button type="button" class="inicio-gestion-btn" id="btnConsultaMontosInicio"><span class="inicio-gestion-org">DGE - DGI - DGS</span><strong>Consulta de Meses y Montos de CS</strong></button>
-              <button type="button" class="inicio-gestion-btn" id="btnGestionRegistro"><span class="inicio-gestion-org">DGE - DGI - Institutos</span><strong>Registro de Compromiso de Servicio</strong></button>
-              <button type="button" class="inicio-gestion-btn" id="btnGestionListados"><span class="inicio-gestion-org">Consultas Grupal y Listados</span><strong>Compromisos de Servicio</strong></button>
-              <button type="button" class="inicio-gestion-btn" id="btnGestionIndividual"><span class="inicio-gestion-org">Consulta Individual de</span><strong>Compromiso de Servicio</strong></button>
+              <button type="button" class="inicio-gestion-btn" id="btnPoliticaInicio"><span class="inicio-gestion-num" aria-hidden="true">1</span><span class="inicio-gestion-org">DPM - Política Salarial</span><strong>Carga de Datos Básicos (Haberes - $ Módulo - GIE)</strong></button>
+              <button type="button" class="inicio-gestion-btn" id="btnConsultaMontosInicio"><span class="inicio-gestion-num" aria-hidden="true">2</span><span class="inicio-gestion-org">DGE - DGI - DGS</span><strong>Consulta de Meses y Montos de CS</strong></button>
+              <button type="button" class="inicio-gestion-btn" id="btnGestionRegistro"><span class="inicio-gestion-num" aria-hidden="true">3</span><span class="inicio-gestion-org">DGE - DGI - Institutos</span><strong>Registro de Compromiso de Servicio</strong></button>
+              <button type="button" class="inicio-gestion-btn" id="btnGestionListados"><span class="inicio-gestion-num" aria-hidden="true">4</span><span class="inicio-gestion-org">Todos</span><strong>Consulta Grupal CS</strong></button>
+              <button type="button" class="inicio-gestion-btn" id="btnGestionIndividual"><span class="inicio-gestion-num" aria-hidden="true">5</span><span class="inicio-gestion-org">Todos</span><strong>Consulta Individual CS</strong></button>
             </div>
             <div class="inicio-panel-datos inicio-panel-estadisticas">
               <div class="inicio-analitica-doble">
